@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary background and text colors */
+    --background: #ffffff; /* White remains as the primary background color */
+    --foreground: #000000; /* Black for most text to maximize readability */
+
+    /* Muted background and text colors for less emphasis areas */
+    --muted: 220 3% 90%; /* Light gray for less emphasized areas */
+    --muted-foreground: #000000; /* Black for text on muted backgrounds for better contrast */
+
+    /* Card background */
+    --card: 0 0% 95%; /* A touch darker off-white for cards for subtle differentiation */
+    --card-foreground: #000000; /* Black text for clarity against card background */
+
+    /* Popover component styling */
+    --popover: 0 0% 95%; /* Match card background for consistency */
+    --popover-foreground: #000000; /* Black text for clarity */
+
+    /* Borders and inputs */
+    --border: #000000; /* Black borders for strong definition around components */
+    --input: 0 0% 98%; /* Keep slightly off-white for input fields to differentiate from the primary background */
+
+    /* Primary interaction elements like buttons */
+    --primary: 215 47% 34%; /* Green for primary interaction elements like buttons */
+    --primary-foreground: 0 0% 95%; /* White text for contrast on green buttons */
+
+    /* Secondary interaction elements */
+    --secondary: 0 0% 85%; /* Darker gray for secondary elements */
+    --secondary-foreground: #000000; /* Black text for clarity on secondary elements */
+
+    /* Accent elements for hover states or small components */
+    --accent: 217 76% 62%; /* Lighter blue */
+    --accent-foreground: #ffffff; /* White text for contrast on hover elements */
+
+    /* Destructive actions */
+    --destructive: 0 84% 60%; /* Slightly darker red for more contrast on destructive actions */
+    --destructive-foreground: 0 0% 0%; /* White text for clarity on destructive buttons */
+
+    /* Focus rings */
+    --ring:  217 58% 50%; /* Lighter blue */
+
+    /* Common border radius for UI elements */
+    --radius: 0.5rem;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  width: 0px;  /* Safari and Chrome */
+  background: transparent;  /* Optional: just in case */
+}

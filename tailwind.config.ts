@@ -32,7 +32,7 @@ const { fontFamily } = require("tailwindcss/defaultTheme")
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ["app/**/*.{ts,tsx}", "components/**/*.{ts,tsx}"],
+  content: ["src/app/**/*.{ts,tsx}", "src/components/**/*.{ts,tsx}"],
   theme: {
     container: {
       center: true,
@@ -42,11 +42,6 @@ module.exports = {
       },
     },
     extend: {
-
-      
-
-
-
       colors: {
         darkestBlue: '#04002E',
         mediumBlue: '#2E5181',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContentBlock } from "../../lib/types";
+import { ContentBlock } from "../../lib/deprecated/types";
 import { ChatBlock } from "./chatBlocks";
 
 interface ContentQueueProps {

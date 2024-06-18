@@ -1,7 +1,7 @@
 import React from 'react';
 import { useChatContext } from '../../lib/providers/chatContext';
 import { useStreaming } from '../../lib/hooks/useStreaming';
-import { StreamingType, SpeakerType } from '../../lib/types';
+import { StreamingType, SpeakerType } from '../../lib/deprecated/types';
 import ReactMarkdown from 'react-markdown';
 
 interface ChatBlockProps {

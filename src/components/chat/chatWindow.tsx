@@ -15,7 +15,7 @@ import {
 	StreamingType,
 	SpeakerType,
 	PipelineModel,
-} from "@/lib/types";  // Assume types are exported from a types file
+} from "@/lib/deprecated/types";  // Assume types are exported from a types file
 import { useAssistant } from "@ai-sdk/react";
 import { Message } from "ai/react";
 import { Button } from "@/components/ui/button";

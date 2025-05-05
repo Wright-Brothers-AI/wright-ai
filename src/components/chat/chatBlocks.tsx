@@ -1,64 +1,64 @@
+import { useStreaming } from '@/lib/hooks/useStreaming';
+import { useChatContext } from '@/lib/providers/chatContext';
 import React from 'react';
-import { useChatContext } from '../../lib/providers/chatContext';
-import { useStreaming } from '../../lib/hooks/useStreaming';
-import { StreamingType, SpeakerType } from '../../lib/deprecated/types';
 import ReactMarkdown from 'react-markdown';
+import { SpeakerType, StreamingType } from '../../lib/deprecated/types';
 
 interface ChatBlockProps {
-  content: string;
-  streamingType: StreamingType;
-  speaker: SpeakerType;
-  blockId: string;
+	content: string;
+	streamingType: StreamingType;
+	speaker: SpeakerType;
+	blockId: string;
 }
 
 export const ChatBlock: React.FC<ChatBlockProps> = ({ content, streamingType, speaker, blockId }) => {
-  const { currentlyStreamingBlockId } = useChatContext();
-  const displayContent = useStreaming(content, streamingType);
+	const { currentlyStreamingBlockId } = useChatContext();
+	const displayContent = useStreaming(content, streamingType);
 
-  const loadingComponent = currentlyStreamingBlockId === blockId ? <Bouncy /> : null;
+	const loadingComponent = currentlyStreamingBlockId === blockId ? <Bouncy /> : null;
 
-  const backgroundColors = {
-    [SpeakerType.user]: "bg-gray-700", // Dark gray for user
-    [SpeakerType.concierge]: "bg-gray-800", // Darker gray for concierge
-    [SpeakerType.abe]: "bg-gray-900", // Even darker gray for Abe
-  };
+	const backgroundColors = {
+		[SpeakerType.user]: "bg-gray-700", // Dark gray for user
+		[SpeakerType.wilbur]: "bg-gray-800", // Darker gray for wilbur
+		[SpeakerType.orville]: "bg-gray-900", // Even darker gray for orville
+	};
 
-  const textColors = {
-    [SpeakerType.user]: "text-gray-200",
-    [SpeakerType.concierge]: "text-gray-200",
-    [SpeakerType.abe]: "text-gray-200",
-  };
+	const textColors = {
+		[SpeakerType.user]: "text-gray-200",
+		[SpeakerType.wilbur]: "text-gray-200",
+		[SpeakerType.orville]: "text-gray-200",
+	};
 
-  const placeholderIcons = {
-    [SpeakerType.concierge]: <ConciergeIconPlaceholder />,
-    [SpeakerType.abe]: <AbeIconPlaceholder />,
-    [SpeakerType.user]: <UserIconPlaceholder />,
-  };
+	const placeholderIcons = {
+		[SpeakerType.wilbur]: <WilburIconPlaceholder />,
+		[SpeakerType.orville]: <OrvilleIconPlaceholder />,
+		[SpeakerType.user]: <UserIconPlaceholder />,
+	};
 
-  return (
-    <div className={`flex items-center ${backgroundColors[speaker]} p-4 rounded-md shadow mb-2`}>
-      <div className="mr-2">
-        {placeholderIcons[speaker]}
-      </div>
-      <div className={`flex-1 ${textColors[speaker]} text-sm font-mono`}>
-        <ReactMarkdown>
-          {displayContent}
-        </ReactMarkdown>
-      </div>
-      {loadingComponent}
-    </div>
-  );
+	return (
+		<div className={`flex items-center ${backgroundColors[speaker]} p-4 rounded-md shadow mb-2`}>
+			<div className="mr-2">
+				{placeholderIcons[speaker]}
+			</div>
+			<div className={`flex-1 ${textColors[speaker]} text-sm font-mono`}>
+				<ReactMarkdown>
+					{displayContent}
+				</ReactMarkdown>
+			</div>
+			{loadingComponent}
+		</div>
+	);
 };
 
 export const Bouncy = () => {
-  return (
-    <div className="flex justify-left items-left">
-      <div className="container items-left justify-left">
-        <div className="cube"><div className="cube__inner"></div></div>
-        <div className="cube"><div className="cube__inner"></div></div>
-        <div className="cube"><div className="cube__inner"></div></div>
-      </div>
-      <style jsx>{`
+	return (
+		<div className="flex justify-left items-left">
+			<div className="container items-left justify-left">
+				<div className="cube"><div className="cube__inner"></div></div>
+				<div className="cube"><div className="cube__inner"></div></div>
+				<div className="cube"><div className="cube__inner"></div></div>
+			</div>
+			<style jsx>{`
         .container {
           --uib-size: 20px;
           --uib-color: blue;
@@ -161,30 +161,30 @@ export const Bouncy = () => {
           }
         }
       `}</style>
-    </div>
-  );
+		</div>
+	);
 };
 
-export const ConciergeIconPlaceholder: React.FC = () => {
-  return (
-    <div className="flex items-center justify-center h-8 w-8 bg-purple-500 text-white text-sm font-semibold rounded-full">
-      C
-    </div>
-  );
+export const WilburIconPlaceholder: React.FC = () => {
+	return (
+		<div className="flex items-center justify-center h-8 w-8 bg-purple-500 text-white text-sm font-semibold rounded-full">
+			W
+		</div>
+	);
 };
 
-export const AbeIconPlaceholder: React.FC = () => {
-  return (
-    <div className="flex items-center justify-center h-8 w-8 bg-teal-500 text-white text-sm font-semibold rounded-full">
-      A
-    </div>
-  );
+export const OrvilleIconPlaceholder: React.FC = () => {
+	return (
+		<div className="flex items-center justify-center h-8 w-8 bg-teal-500 text-white text-sm font-semibold rounded-full">
+			O
+		</div>
+	);
 };
 
 export const UserIconPlaceholder: React.FC = () => {
-  return (
-    <div className="flex items-center justify-center h-8 w-8 bg-blue-500 text-white text-sm font-semibold rounded-full">
-      U
-    </div>
-  );
+	return (
+		<div className="flex items-center justify-center h-8 w-8 bg-blue-500 text-white text-sm font-semibold rounded-full">
+			U
+		</div>
+	);
 };

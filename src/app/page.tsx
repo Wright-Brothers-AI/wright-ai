@@ -1,243 +1,321 @@
 "use client";
 // File: /app/home/page.tsx
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textArea';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { ArrowRight, BookOpen, CheckCircle, FileText, MessageSquare, Plane, Users } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
-import clouds from '../../public/clouds.jpeg';
-import { useState } from 'react';
 
 export default function Home() {
-	const [question, setQuestion] = useState('');
-	const [response, setResponse] = useState({ wilbur: '', orville: '' });
-
-	const handleAsk = async () => {
-		// Placeholder for API call to fetch responses from AI
-		setResponse({
-			wilbur: 'Loading response from AIM...',
-			orville: 'Loading response from FAR...'
-		});
-
-		// Simulate API response
-		setTimeout(() => {
-			setResponse({
-				wilbur: 'Response based on Aeronautical Information Manual.',
-				orville: 'Response based on Federal Aviation Regulations.'
-			});
-		}, 2000);
-	};
-
 	return (
-		<main>
-			<div className="flex flex-col">
-				<div className="flex overflow-hidden relative flex-col items-center justify-center px-16 py-20 w-full text-white min-h-[900px] max-md:px-5 max-md:max-w-full">
-					<video
-						className="absolute top-0 left-0 w-full h-full object-cover"
-						autoPlay
-						loop
-						muted
-						playsInline
-						src="/cloud-loop.mp4"
-					>
-						Provided by freepik.com
-					</video>
-					<div className="relative z-10 flex flex-col items-center justify-center text-center">
-						<div className="text-2xl sm:text-5xl md:text-7xl lg:text-9xl font-bold leading-[67px] max-md:text-4xl max-md:leading-[54px] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
-							Wright Brothers AI
-						</div>
-						<div className="mt-6 text-lg leading-7 max-md:max-w-full drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
-							Your AI-Powered Flight Instructors
-						</div>
-					</div>
-				</div>
-				<div className="flex flex-col">
-					<div className="flex overflow-hidden relative flex-col justify-center items-center p-20 w-full text-white min-h-[900px] max-md:px-5 max-md:max-w-full">
-						<Image
-							src="/clouds.jpg"
-							alt="Background"
-							layout="fill"
-							objectFit="cover"
-						/>
-
-						<div className="relative mt-56 text-6xl font-bold text-center leading-[67px] w-[800px] max-md:mt-10 max-md:max-w-full max-md:text-4xl max-md:leading-[54px] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
-							Begin your AI powered flight education
-						</div>
-						<div className="relative mt-6 text-lg leading-7 text-center w-[768px] max-md:max-w-full drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
-							Interact with our AI Aviation Experts
-						</div>
-						<div className="flex relative gap-4 items-start pt-4 mt-6 mb-36 text-base leading-6 whitespace-nowrap max-md:mb-10">
-							<Button className="bg-accent text-accent-foreground px-8 py-3 rounded-full hover:bg-accent-hover">
-								Chat with Wilbur and Oroville
-							</Button>
-						</div>
-					</div>
-				</div>
-				<div className="flex flex-col justify-center py-12 w-full bg-white max-md:max-w-full">
-					<div className="w-full max-md:max-w-full">
-						<div className="flex gap-5 max-md:flex-col max-md:gap-0">
-							<div className="flex flex-col pl-12 w-6/12 max-md:ml-0 max-md:w-full">
-								<div className="flex flex-col grow justify-center self-stretch px-8 py-20 max-md:px-5 max-md:max-w-full">
-									<div className="text-6xl font-bold text-black leading-[67px] max-md:mt-10 max-md:max-w-full max-md:text-4xl max-md:leading-[54px]">
-										Explore Aviation with AI
-									</div>
-									<div id="nav1" className="mt-6 text-lg leading-7 text-black max-md:max-w-full">
-										Wright Brothers AI offers advanced AI solutions to help you navigate the complexities of aviation regulations and flight information.
-									</div>
-								</div>
+		<main className="flex flex-col min-h-screen bg-background">
+			{/* Hero Section */}
+			<section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-b from-background to-secondary/20">
+				<div className="container px-4 md:px-6">
+					<div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
+						<div className="flex flex-col justify-center space-y-4">
+							<div className="space-y-2">
+								<Badge className="inline-flex items-center border bg-primary px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-primary-foreground">
+									Flight Education Reimagined
+								</Badge>
+								<h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+									Wright Brothers AI
+								</h1>
+								<p className="max-w-[600px] text-muted-foreground md:text-xl">
+									Your AI-powered flight instructors, helping student pilots master aviation regulations and procedures.
+								</p>
 							</div>
-							<div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-								<div className="flex flex-col grow self-stretch w-full max-md:max-w-full">
-									<Image
-										src="/atc.jpg"
-										alt="Aviation Image"
-										width={500}
-										height={477}
-									/>
-								</div>
+							<div className="flex flex-col gap-2 min-[400px]:flex-row">
+								<Link href="/chat">
+									<Button size="lg" className="gap-1.5">
+										Start Learning <ArrowRight className="h-4 w-4" />
+									</Button>
+								</Link>
+								<Link href="/features">
+									<Button size="lg" variant="outline">
+										Explore Features
+									</Button>
+								</Link>
 							</div>
 						</div>
+						<div className="relative hidden lg:block">
+							<div className="absolute inset-0 bg-gradient-to-r from-background to-background/0 z-10" />
+							<Image
+								src="/cloud-hero.jpg"
+								alt="Airplane flying through clouds"
+								width={600}
+								height={400}
+								className="mx-auto aspect-video overflow-hidden rounded-xl object-cover"
+							/>
+						</div>
 					</div>
 				</div>
+			</section>
 
-				<div className="flex overflow-hidden relative flex-col justify-center px-16 py-20 min-h-[900px] max-md:px-5">
-					<Image
-						loading="lazy"
-						src="/navigate.jpg"
-						layout="fill"
-						objectFit="cover"
-						className="absolute inset-0"
-						alt="Aviation Background"
-					/>
-					<div className="relative mt-8 max-md:mr-1 max-md:max-w-full">
-						<div className="flex gap-5 max-md:flex-col max-md:gap-0">
-							<div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-								<div className="flex relative flex-col grow justify-end self-stretch pt-20 text-white max-md:mt-10 max-md:max-w-full">
-									<div className="mt-96 text-5xl font-bold leading-[67px] max-md:mt-10 max-md:max-w-full max-md:text-4xl max-md:leading-[54px]">
-										Enhance Your Knowledge
+			{/* Features Section */}
+			<section id="ai-features" className="w-full py-12 md:py-24 lg:py-32 bg-background">
+				<div className="container px-4 md:px-6">
+					<div className="flex flex-col items-center justify-center space-y-4 text-center">
+						<div className="space-y-2">
+							<h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+								Meet Your AI Flight Instructors
+							</h2>
+							<p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+								Wright Brothers AI offers specialized AI assistants for different aspects of aviation education.
+							</p>
+						</div>
+					</div>
+					<div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 lg:gap-12 py-12">
+						<Card className="flex flex-col h-full" id="wilbur">
+							<CardHeader className="pb-0">
+								<CardTitle className="flex items-center gap-2">
+									<FileText className="h-5 w-5 text-primary" />
+									Wilbur AI
+								</CardTitle>
+								<CardDescription>
+									Federal Aviation Regulations Expert
+								</CardDescription>
+							</CardHeader>
+							<CardContent className="pt-6 flex-1">
+								<div className="flex items-start gap-4">
+									<div className="relative w-24 h-24 rounded-lg overflow-hidden">
+										<Image
+											src="/wilbur.jpeg"
+											alt="Wilbur AI"
+											fill
+											className="object-cover"
+										/>
 									</div>
-									<div className="mt-2 text-6xl font-bold leading-[67px] max-md:mt-10 max-md:max-w-full max-md:text-4xl max-md:leading-[54px]">
-										with Dynamic AI
+									<div>
+										<p className="text-sm text-muted-foreground">
+											Wilbur AI specializes in interpreting the Code of Federal Regulations (FAR), providing precise and reliable information to ensure you stay compliant with aviation laws.
+										</p>
+										<ul className="mt-4 grid gap-2">
+											<li className="flex items-center gap-2">
+												<CheckCircle className="h-4 w-4 text-primary" />
+												<span className="text-sm">FAR Title 14 expertise</span>
+											</li>
+											<li className="flex items-center gap-2">
+												<CheckCircle className="h-4 w-4 text-primary" />
+												<span className="text-sm">Regulatory compliance guidance</span>
+											</li>
+											<li className="flex items-center gap-2">
+												<CheckCircle className="h-4 w-4 text-primary" />
+												<span className="text-sm">Licensing requirements</span>
+											</li>
+										</ul>
 									</div>
-									<div className="flex gap-4 items-start self-start pt-4 mt-4 text-base leading-6 whitespace-nowrap">
-										<div className="justify-center px-6 py-3 border border-white border-solid max-md:px-5">
-											Learn More
+								</div>
+							</CardContent>
+							<CardFooter>
+								<Link href="/chat?assistant=wilbur">
+									<Button variant="outline" className="w-full">Chat with Wilbur</Button>
+								</Link>
+							</CardFooter>
+						</Card>
+						<Card className="flex flex-col h-full" id="orville">
+							<CardHeader className="pb-0">
+								<CardTitle className="flex items-center gap-2">
+									<BookOpen className="h-5 w-5 text-primary" />
+									Orville AI
+								</CardTitle>
+								<CardDescription>
+									Aeronautical Information Manual Expert
+								</CardDescription>
+							</CardHeader>
+							<CardContent className="pt-6 flex-1">
+								<div className="flex items-start gap-4">
+									<div className="relative w-24 h-24 rounded-lg overflow-hidden">
+										<Image
+											src="/orville.jpeg"
+											alt="Orville AI"
+											fill
+											className="object-cover"
+										/>
+									</div>
+									<div>
+										<p className="text-sm text-muted-foreground">
+											Orville AI focuses on the Aeronautical Information Manual (AIM), offering in-depth guidance and insights to help you understand and follow aviation protocols effectively.
+										</p>
+										<ul className="mt-4 grid gap-2">
+											<li className="flex items-center gap-2">
+												<CheckCircle className="h-4 w-4 text-primary" />
+												<span className="text-sm">AIM procedure guidance</span>
+											</li>
+											<li className="flex items-center gap-2">
+												<CheckCircle className="h-4 w-4 text-primary" />
+												<span className="text-sm">Air traffic control protocols</span>
+											</li>
+											<li className="flex items-center gap-2">
+												<CheckCircle className="h-4 w-4 text-primary" />
+												<span className="text-sm">Navigation best practices</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</CardContent>
+							<CardFooter>
+								<Link href="/chat?assistant=orville">
+									<Button variant="outline" className="w-full">Chat with Orville</Button>
+								</Link>
+							</CardFooter>
+						</Card>
+					</div>
+				</div>
+			</section>
+
+			{/* How It Works Section */}
+			<section className="w-full py-12 md:py-24 lg:py-32 bg-muted/50">
+				<div className="container px-4 md:px-6">
+					<div className="flex flex-col items-center justify-center space-y-4 text-center">
+						<div className="space-y-2">
+							<h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+								How Wright Brothers AI Works
+							</h2>
+							<p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+								Our AI system is designed to make flight education accessible and effective.
+							</p>
+						</div>
+					</div>
+					<div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-3 md:gap-12 py-12">
+						<div className="flex flex-col items-center space-y-4 text-center">
+							<div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+								<MessageSquare className="h-8 w-8 text-primary" />
+							</div>
+							<div className="space-y-2">
+								<h3 className="text-xl font-bold">Ask Questions</h3>
+								<p className="text-muted-foreground">
+									Type your aviation questions and get instant, accurate answers from our specialized AI assistants.
+								</p>
+							</div>
+						</div>
+						<div className="flex flex-col items-center space-y-4 text-center">
+							<div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+								<BookOpen className="h-8 w-8 text-primary" />
+							</div>
+							<div className="space-y-2">
+								<h3 className="text-xl font-bold">Learn Regulations</h3>
+								<p className="text-muted-foreground">
+									Study FAR and AIM content with AI assistance that explains complex concepts in simple terms.
+								</p>
+							</div>
+						</div>
+						<div className="flex flex-col items-center space-y-4 text-center">
+							<div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+								<Plane className="h-8 w-8 text-primary" />
+							</div>
+							<div className="space-y-2">
+								<h3 className="text-xl font-bold">Master Aviation</h3>
+								<p className="text-muted-foreground">
+									Build confidence and knowledge through interactive learning that adapts to your needs.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			{/* Testimonials Section */}
+			<section className="w-full py-12 md:py-24 lg:py-32 bg-background">
+				<div className="container px-4 md:px-6">
+					<div className="flex flex-col items-center justify-center space-y-4 text-center">
+						<div className="space-y-2">
+							<h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+								What Student Pilots Say
+							</h2>
+							<p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+								Hear from pilots who have improved their knowledge with Wright Brothers AI.
+							</p>
+						</div>
+					</div>
+					<div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3 lg:gap-12 py-12">
+						<Card>
+							<CardContent className="pt-6">
+								<div className="flex flex-col gap-4">
+									<p className="text-sm text-muted-foreground italic">
+										"Wright Brothers AI helped me understand complex FAR regulations that I was struggling with. The ability to ask questions in natural language made all the difference."
+									</p>
+									<div className="flex items-center gap-4">
+										<div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+											<Users className="h-5 w-5 text-primary" />
+										</div>
+										<div>
+											<p className="text-sm font-medium">Michael S.</p>
+											<p className="text-xs text-muted-foreground">Private Pilot Student</p>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-								<div className="relative text-xl leading-7 text-white max-md:mt-10 max-md:max-w-full">
-									Our AI extends comprehensive aviation knowledge dynamically, ensuring you have access to accurate information when you need it.
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				{/* <div className="flex overflow-hidden relative flex-col justify-center items-center p-20 w-full text-white min-h-[900px] max-md:px-5 max-md:max-w-full">
-					<Image
-						src="/knowledgeHub.jpg"
-						alt="Background"
-						layout="fill"
-						objectFit="cover"
-					/>
-					<div className="relative mt-52 text-6xl font-bold text-center leading-[67px] w-[768px] max-md:mt-10 max-md:max-w-full max-md:text-4xl max-md:leading-[54px]">
-						Accurate Primary Source Legislation
-					</div>
-					<div className="relative mt-6 text-lg leading-7 text-center w-[768px] max-md:max-w-full">
-						Wright Brothers AI sources all information directly from primary source legislation and regulations.
-					</div>
-					<div className="flex relative gap-4 items-start pt-4 mt-6 mb-36 text-base leading-6 whitespace-nowrap max-md:mb-10">
-						<div className="justify-center px-6 py-3 border border-white border-solid max-md:px-5">
-							Learn How
-						</div>
-					</div>
-				</div> */}
-
-				<div className="flex flex-col justify-center w-full bg-white max-md:max-w-full">
-					<div className="w-full max-md:max-w-full">
-						<div className="flex gap-5 max-md:flex-col max-md:gap-0">
-							<div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-								<div className="flex flex-col grow justify-center self-stretch px-16 py-20 max-md:px-5 max-md:max-w-full">
-									<div className="mt-52 text-6xl font-bold text-black leading-[67px] max-md:mt-10 max-md:max-w-full max-md:text-4xl max-md:leading-[54px]">
-										About Wilbur AI
-									</div>
-									<div id="wilbur" className="mt-6 text-lg leading-7 text-black max-md:max-w-full">
-										Wilbur AI specializes in interpreting the Code of Federal Regulations (FAR), providing precise and reliable information to ensure you stay compliant with aviation laws.
-									</div>
-									<div className="flex gap-4 items-start self-start pt-4 mt-6 text-base leading-6 whitespace-nowrap">
-										<div className="justify-center px-6 py-3 text-black border border-black border-solid max-md:px-5">
-											Learn More About Wilbur AI
+							</CardContent>
+						</Card>
+						<Card>
+							<CardContent className="pt-6">
+								<div className="flex flex-col gap-4">
+									<p className="text-sm text-muted-foreground italic">
+										"Studying for my checkride was so much easier with Orville AI. I could quickly get clarification on AIM procedures without digging through the entire manual."
+									</p>
+									<div className="flex items-center gap-4">
+										<div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+											<Users className="h-5 w-5 text-primary" />
+										</div>
+										<div>
+											<p className="text-sm font-medium">Jennifer L.</p>
+											<p className="text-xs text-muted-foreground">Commercial Pilot</p>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
-								<div className="flex flex-col grow self-stretch w-full max-md:max-w-full">
-									<Image
-										src="/wilbur.jpeg"
-										alt="Wilbur AI"
-										width={500}
-										height={477}
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div className="flex flex-col justify-center px-16 py-20 w-full bg-background max-md:px-5 max-md:max-w-full">
-					<div className="mt-8 mb-2.5 max-md:mr-1 max-md:max-w-full">
-						<div className="flex gap-5 max-md:flex-col max-md:gap-0">
-							<div className="flex flex-col w-2/3 max-md:ml-0 max-md:w-full">
-								<div className="flex flex-col self-stretch my-auto text-black max-md:mt-10 max-md:max-w-full">
-									<div id="privacy" className="text-4xl font-bold leading-10 max-md:max-w-full">
-										About Orville AI
-									</div>
-									<div id="orville" className="mt-6 text-lg leading-7 max-md:max-w-full">
-										Orville AI focuses on the Aeronautical Information Manual (AIM), offering in-depth guidance and insights to help you understand and follow aviation protocols effectively.
-									</div>
-								</div>
-							</div>
-							<div className="flex flex-col ml-5 w-1/3 max-md:ml-0 max-md:w-full">
-								<Image
-									loading="lazy"
-									src="/orville.jpeg"
-									alt="Orville AI"
-									width={1000}
-									height={960}
-									className="grow w-full aspect-[0.96] max-md:mt-10 max-md:max-w-full"
-								/>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div className="flex flex-col justify-center w-full bg-white max-md:max-w-full">
-					<div className="w-full max-md:max-w-full">
-						<div className="flex gap-5 max-md:flex-col max-md:gap-0">
-							<div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
-								<div className="flex flex-col grow justify-center self-stretch px-16 py-20 max-md:px-5 max-md:max-w-full">
-									<div className="mt-52 text-6xl font-bold text-black leading-[67px] max-md:mt-10 max-md:max-w-full max-md:text-4xl max-md:leading-[54px]">
-										Value Proposition
-									</div>
-									<div className="mt-6 text-lg leading-7 text-black max-md:max-w-full">
-										Wright Brothers AI provides unmatched accuracy and comprehensive insights into aviation regulations, helping you stay informed and compliant effortlessly.
-									</div>
-									<div className="flex gap-4 items-start self-start pt-4 mt-6 text-base leading-6 whitespace-nowrap">
-										<div className="justify-center px-6 py-3 text-black border border-black border-solid max-md:px-5">
-											Discover Our Benefits
+							</CardContent>
+						</Card>
+						<Card>
+							<CardContent className="pt-6">
+								<div className="flex flex-col gap-4">
+									<p className="text-sm text-muted-foreground italic">
+										"The ability to chat with both Wilbur and Orville at the same time gives me a comprehensive understanding of both regulations and procedures. Highly recommend!"
+									</p>
+									<div className="flex items-center gap-4">
+										<div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+											<Users className="h-5 w-5 text-primary" />
+										</div>
+										<div>
+											<p className="text-sm font-medium">David R.</p>
+											<p className="text-xs text-muted-foreground">Flight Instructor</p>
 										</div>
 									</div>
 								</div>
-							</div>
+							</CardContent>
+						</Card>
+					</div>
+				</div>
+			</section>
+
+			{/* Final CTA Section */}
+			<section className="w-full py-12 md:py-24 lg:py-32 bg-primary text-primary-foreground">
+				<div className="container px-4 md:px-6">
+					<div className="flex flex-col items-center justify-center space-y-4 text-center">
+						<div className="space-y-2">
+							<h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+								Ready to Elevate Your Aviation Knowledge?
+							</h2>
+							<p className="max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+								Join Wright Brothers AI today and transform how you learn aviation regulations and procedures.
+							</p>
+						</div>
+						<div className="flex flex-col gap-2 min-[400px]:flex-row">
+							<Link href="/signup">
+								<Button size="lg" variant="secondary" className="gap-1.5">
+									Get Started <ArrowRight className="h-4 w-4" />
+								</Button>
+							</Link>
+							<Link href="/pricing">
+								<Button size="lg" variant="outline" className="bg-primary-foreground/10 text-primary-foreground border-primary-foreground/20 hover:bg-primary-foreground/20">
+									View Pricing
+								</Button>
+							</Link>
 						</div>
 					</div>
 				</div>
-			</div>
-
-
+			</section>
 		</main>
 	);
 }

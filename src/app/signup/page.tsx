@@ -1,103 +1,149 @@
-import Link from "next/link";
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { SubmitButton } from "../login/submit-button";
-import { signup } from './actions'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import { signup } from './actions';
 
-export default function Login({
-  searchParams,
+export default function Signup({
+	searchParams,
 }: {
-  searchParams: { message: string };
+	searchParams: { message: string; };
 }) {
-  
+	const [isLoading, setIsLoading] = useState(false);
 
-  const signUpLocal = async (formData: FormData) => {
-    "use server";
-    await signup(formData);
-  };
+	async function handleSignup(formData: FormData) {
+		setIsLoading(true);
+		await signup(formData);
+		setIsLoading(false);
+	}
 
-  return (
-    
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
-      <Link
-        href="/"
-        className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
-        >
-          <polyline points="15 18 9 12 15 6" />
-        </svg>{" "}
-        Back
-      </Link>
+	return (
+		<div className="container flex h-screen w-screen flex-col items-center justify-center">
+			<Link
+				href="/"
+				className="absolute left-4 top-4 md:left-8 md:top-8 flex items-center justify-center rounded-md border border-input bg-background p-2.5 hover:bg-accent hover:text-accent-foreground"
+			>
+				<ArrowLeft className="h-4 w-4" />
+				<span className="sr-only">Go back</span>
+			</Link>
 
-      <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
-        <label className="text-md" htmlFor="email">
-          Email
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          name="email"
-          placeholder="you@example.com"
-          required
-        />
-        <label className="text-md" htmlFor="password">
-          Password
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          type="password"
-          name="password"
-          placeholder="••••••••"
-          required
-        />
-		<label className="text-md" htmlFor="organization">
-          Organization ID
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          name="organizationId"
-          required
-        />
-		<label className="text-md" htmlFor="firstName">
-          First Name
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          name="firstName"
-          
-          required
-        />
-		<label className="text-md" htmlFor="lastName">
-          Last Name
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          name="lastName"
-          required
-        />
-        <SubmitButton
-          formAction={signUpLocal}
-          className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-          pendingText="Signing Up..."
-        >
-          Sign Up
-        </SubmitButton>
-        {searchParams?.message && (
-          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
-            {searchParams.message}
-          </p>
-        )}
-      </form>
-    </div>
-  );
+			<div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px]">
+				<div className="flex flex-col space-y-2 text-center">
+					<h1 className="text-2xl font-semibold tracking-tight">
+						Create an account
+					</h1>
+					<p className="text-sm text-muted-foreground">
+						Sign up to start learning with Wright Brothers AI
+					</p>
+				</div>
+
+				<Card>
+					<CardHeader>
+						<CardTitle className="text-xl">Sign Up</CardTitle>
+						<CardDescription>
+							Fill in your details to create a new account
+						</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<form action={handleSignup} className="grid gap-4">
+							<div className="grid grid-cols-2 gap-4">
+								<div className="grid gap-2">
+									<Label htmlFor="firstName">First Name</Label>
+									<Input
+										id="firstName"
+										name="firstName"
+										placeholder="John"
+										autoCapitalize="words"
+										required
+									/>
+								</div>
+								<div className="grid gap-2">
+									<Label htmlFor="lastName">Last Name</Label>
+									<Input
+										id="lastName"
+										name="lastName"
+										placeholder="Doe"
+										autoCapitalize="words"
+										required
+									/>
+								</div>
+							</div>
+
+							<div className="grid gap-2">
+								<Label htmlFor="email">Email</Label>
+								<Input
+									id="email"
+									name="email"
+									type="email"
+									placeholder="you@example.com"
+									autoCapitalize="none"
+									autoComplete="email"
+									autoCorrect="off"
+									required
+								/>
+							</div>
+
+							<div className="grid gap-2">
+								<Label htmlFor="password">Password</Label>
+								<Input
+									id="password"
+									name="password"
+									type="password"
+									placeholder="••••••••"
+									autoCapitalize="none"
+									autoComplete="new-password"
+									autoCorrect="off"
+									required
+								/>
+							</div>
+
+							<div className="grid gap-2">
+								<Label htmlFor="organizationId">Organization ID</Label>
+								<Input
+									id="organizationId"
+									name="organizationId"
+									placeholder="Enter your organization ID"
+									required
+								/>
+								<p className="text-xs text-muted-foreground">
+									Contact your administrator if you don't have an organization ID
+								</p>
+							</div>
+
+							<Button type="submit" className="w-full mt-2" disabled={isLoading}>
+								{isLoading ? (
+									<>
+										<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+										Creating account...
+									</>
+								) : (
+									"Create Account"
+								)}
+							</Button>
+						</form>
+					</CardContent>
+					<CardFooter className="flex flex-col gap-2">
+						<div className="text-center text-sm text-muted-foreground">
+							Already have an account?{" "}
+							<Link href="/login" className="text-primary hover:underline">
+								Sign in
+							</Link>
+						</div>
+
+						{searchParams?.message && (
+							<div className="mt-2 p-3 bg-destructive/10 text-destructive text-center text-sm rounded-md border border-destructive/20">
+								{searchParams.message}
+							</div>
+						)}
+					</CardFooter>
+				</Card>
+			</div>
+		</div>
+	);
 }
 

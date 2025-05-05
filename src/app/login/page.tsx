@@ -1,88 +1,149 @@
-import Link from "next/link";
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { SubmitButton } from "./submit-button";
-import { login, loginDemo, signup } from './actions'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import { login, loginDemo } from './actions';
 
 export default function Login({
-  searchParams,
+	searchParams,
 }: {
-  searchParams: { message: string };
+	searchParams: { message: string; next?: string; };
 }) {
-  
-  const signInLocal = async (formData: FormData) => {
-    "use server";
-    await login(formData);
-  };
-  const signInDemo = async (e: any) => {
-    "use server";
-	e.preventdefault();
-    await loginDemo();
-  };
+	const [isLoading, setIsLoading] = useState(false);
+	const [isDemoLoading, setIsDemoLoading] = useState(false);
 
-  
+	async function handleLogin(formData: FormData) {
+		setIsLoading(true);
+		await login(formData);
+		setIsLoading(false);
+	}
 
-  return (
-    
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
-      <Link
-        href="/"
-        className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
-        >
-          <polyline points="15 18 9 12 15 6" />
-        </svg>{" "}
-        Back
-      </Link>
+	async function handleDemoLogin() {
+		setIsDemoLoading(true);
+		await loginDemo();
+		setIsDemoLoading(false);
+	}
 
-      <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
-        <label className="text-md" htmlFor="email">
-          Email
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          name="email"
-          placeholder="you@example.com"
-          required
-        />
-        <label className="text-md" htmlFor="password">
-          Password
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          type="password"
-          name="password"
-          placeholder="••••••••"
-          required
-        />
-        <SubmitButton
-          formAction={signInLocal}
-          pendingText="Signing In..."
-        >
-          Sign In
-        </SubmitButton>
-        <Button
-          onClick={signInDemo}
-        >
-          View Demo
-        </Button>
-        {searchParams?.message && (
-          <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
-            {searchParams.message}
-          </p>
-        )}
-      </form>
-    </div>
-  );
+	return (
+		<div className="container flex h-screen w-screen flex-col items-center justify-center">
+			<Link
+				href="/"
+				className="absolute left-4 top-4 md:left-8 md:top-8 flex items-center justify-center rounded-md border border-input bg-background p-2.5 hover:bg-accent hover:text-accent-foreground"
+			>
+				<ArrowLeft className="h-4 w-4" />
+				<span className="sr-only">Go back</span>
+			</Link>
+
+			<div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+				<div className="flex flex-col space-y-2 text-center">
+					<h1 className="text-2xl font-semibold tracking-tight">
+						Welcome back
+					</h1>
+					<p className="text-sm text-muted-foreground">
+						Enter your credentials to sign in to your account
+					</p>
+				</div>
+
+				<Card>
+					<CardHeader>
+						<CardTitle className="text-xl">Sign In</CardTitle>
+						<CardDescription>
+							Access your Wright Brothers AI account
+						</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<form action={handleLogin} className="grid gap-4">
+							<div className="grid gap-2">
+								<Label htmlFor="email">Email</Label>
+								<Input
+									id="email"
+									name="email"
+									type="email"
+									placeholder="you@example.com"
+									autoCapitalize="none"
+									autoComplete="email"
+									autoCorrect="off"
+									required
+								/>
+							</div>
+							<div className="grid gap-2">
+								<div className="flex items-center justify-between">
+									<Label htmlFor="password">Password</Label>
+									<Link href="/forgot-password" className="text-xs text-primary hover:underline">
+										Forgot password?
+									</Link>
+								</div>
+								<Input
+									id="password"
+									name="password"
+									type="password"
+									placeholder="••••••••"
+									autoCapitalize="none"
+									autoComplete="current-password"
+									autoCorrect="off"
+									required
+								/>
+							</div>
+							<Button type="submit" className="w-full" disabled={isLoading}>
+								{isLoading ? (
+									<>
+										<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+										Signing In...
+									</>
+								) : (
+									"Sign In"
+								)}
+							</Button>
+						</form>
+
+						<div className="relative my-4">
+							<div className="absolute inset-0 flex items-center">
+								<Separator />
+							</div>
+							<div className="relative flex justify-center text-xs uppercase">
+								<span className="bg-card px-2 text-muted-foreground">Or</span>
+							</div>
+						</div>
+
+						<Button
+							variant="outline"
+							className="w-full"
+							onClick={handleDemoLogin}
+							disabled={isDemoLoading}
+						>
+							{isDemoLoading ? (
+								<>
+									<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+									Loading Demo...
+								</>
+							) : (
+								"Try Demo"
+							)}
+						</Button>
+					</CardContent>
+					<CardFooter className="flex flex-col gap-2">
+						<div className="text-center text-sm text-muted-foreground">
+							Don't have an account?{" "}
+							<Link href="/signup" className="text-primary hover:underline">
+								Sign up
+							</Link>
+						</div>
+
+						{searchParams?.message && (
+							<div className="mt-2 p-3 bg-destructive/10 text-destructive text-center text-sm rounded-md border border-destructive/20">
+								{searchParams.message}
+							</div>
+						)}
+					</CardFooter>
+				</Card>
+			</div>
+		</div>
+	);
 }
 

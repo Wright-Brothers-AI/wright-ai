@@ -309,7 +309,7 @@ export default function FeaturesPage() {
 							<Plane className="h-10 w-10 text-primary" />
 							<h3 className="text-2xl font-bold">For Student Pilots</h3>
 							<p className="text-muted-foreground">
-								Whether you're just starting your flight training or preparing for your checkride, Wright Brothers AI gives you the knowledge edge.
+								Whether you&apos;re just starting your flight training or preparing for your checkride, Wright Brothers AI gives you the knowledge edge.
 							</p>
 							<ul className="space-y-2 mt-4">
 								<li className="flex items-center gap-2">

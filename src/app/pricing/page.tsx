@@ -76,7 +76,7 @@ export default function PricingPage() {
 				<div className="space-y-2">
 					<h1 className="text-3xl font-bold sm:text-4xl md:text-5xl">Simple, Transparent Pricing</h1>
 					<p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-						Choose the plan that's right for your aviation learning journey.
+						Choose the plan that&apos;s right for your aviation learning journey.
 					</p>
 				</div>
 

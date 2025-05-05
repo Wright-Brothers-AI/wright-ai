@@ -111,7 +111,7 @@ export default function Signup({
 									required
 								/>
 								<p className="text-xs text-muted-foreground">
-									Contact your administrator if you don't have an organization ID
+									Contact your administrator if you don&apos;t have an organization ID
 								</p>
 							</div>
 

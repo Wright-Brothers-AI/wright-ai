@@ -235,7 +235,7 @@ export default function Home() {
 							<CardContent className="pt-6">
 								<div className="flex flex-col gap-4">
 									<p className="text-sm text-muted-foreground italic">
-										"Wright Brothers AI helped me understand complex FAR regulations that I was struggling with. The ability to ask questions in natural language made all the difference."
+										&quot;Wright Brothers AI helped me understand complex FAR regulations that I was struggling with. The ability to ask questions in natural language made all the difference.&quot;
 									</p>
 									<div className="flex items-center gap-4">
 										<div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
@@ -253,7 +253,7 @@ export default function Home() {
 							<CardContent className="pt-6">
 								<div className="flex flex-col gap-4">
 									<p className="text-sm text-muted-foreground italic">
-										"Studying for my checkride was so much easier with Orville AI. I could quickly get clarification on AIM procedures without digging through the entire manual."
+										&quot;Studying for my checkride was so much easier with Orville AI. I could quickly get clarification on AIM procedures without digging through the entire manual.&quot;
 									</p>
 									<div className="flex items-center gap-4">
 										<div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
@@ -271,7 +271,7 @@ export default function Home() {
 							<CardContent className="pt-6">
 								<div className="flex flex-col gap-4">
 									<p className="text-sm text-muted-foreground italic">
-										"The ability to chat with both Wilbur and Orville at the same time gives me a comprehensive understanding of both regulations and procedures. Highly recommend!"
+										&quot;The ability to chat with both Wilbur and Orville at the same time gives me a comprehensive understanding of both regulations and procedures. Highly recommend!&quot;
 									</p>
 									<div className="flex items-center gap-4">
 										<div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
